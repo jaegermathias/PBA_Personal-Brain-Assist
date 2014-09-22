@@ -1,0 +1,2 @@
+timestampMs,poorSignal,eegRawValue,eegRawValueVolts,attention,meditation,blinkStrength,delta,theta,alphaLow,alphaHigh,betaLow,betaHigh,gammaLow,gammaMid,tagEvent,location
+1407076660513,0,-315,-6.92138671875E-5,70,41,45,25560,11420,3925,13530,11331,16745957,8060,4089,Tag7,unknown
