@@ -1,24 +1,57 @@
 <!doctype html>
 <html class="no-js" lang="">
 	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-type" content="text/html" charset="utf-8">
 		<title>Personal-Brain-Assist</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="icon" type="image/png" href="img/icons/favicon.png">
+		
+		<!-- Scripts -->
+		<script type="text/javascript" src="js/lib/d3.js"></script>		
+		<script type="text/javascript" src="js/lib/crossfilter.js"></script>
+		<script type="text/javascript" src="js/lib/dc.js"></script>
+		
+		<!-- Stylesheets-->
 		<link rel="stylesheet" href="css/index.css">
+		<link rel="stylesheet" href="css/dc.css">
 	</head>
 	<body>
-		<div id="crossfading">
-			<!-- <a href="html/startseite.html"> -->
-			<a href="html/content.html">
-			<img class="bottom" src="img/portrait_intro2.png" />
-			<img class="top" src="img/portrait_intro1.png" />
-			</a>
-		</div>
 
-		<script src="js/main.js"></script>
+
+	<script type="text/javascript">
+		var data = [
+		  {date: "2011-11-14T16:17:54Z", quantity: 2, total: 190, tip: 100, type: "tab"},
+		  {date: "2011-11-14T16:20:19Z", quantity: 2, total: 190, tip: 100, type: "tab"},
+		  {date: "2011-11-14T16:28:54Z", quantity: 1, total: 300, tip: 200, type: "visa"},
+		  {date: "2011-11-14T16:30:43Z", quantity: 2, total: 90, tip: 0, type: "tab"},
+		  {date: "2011-11-14T16:48:46Z", quantity: 2, total: 90, tip: 0, type: "tab"},
+		  {date: "2011-11-14T16:53:41Z", quantity: 2, total: 90, tip: 0, type: "tab"},
+		  {date: "2011-11-14T16:54:06Z", quantity: 1, total: 100, tip: 0, type: "cash"},
+		  {date: "2011-11-14T16:58:03Z", quantity: 2, total: 90, tip: 0, type: "tab"},
+		  {date: "2011-11-14T17:07:21Z", quantity: 2, total: 90, tip: 0, type: "tab"},
+		  {date: "2011-11-14T17:22:59Z", quantity: 2, total: 90, tip: 0, type: "tab"},
+		  {date: "2011-11-14T17:25:45Z", quantity: 2, total: 200, tip: 0, type: "cash"},
+		  {date: "2011-11-14T17:29:52Z", quantity: 1, total: 200, tip: 100, type: "visa"}
+		];
+		
+		var ndx = crossfilter(data);
+		
+		var totalDim = ndx.dimension(function(d){return d.total;});
+		
+		var total_90 = totalDim.filter(90);
+		
+		print_filter("total_90");
+		
+		function print_filter(filter){
+			var f=eval(filter);
+			if (typeof(f.length) != "undefined") {}else{}
+			if (typeof(f.top) != "undefined") {f=f.top(Infinity);}else{}
+			if (typeof(f.dimension) != "undefined") {f=f.dimension(function(d) { return "";}).top(Infinity);}else{}
+			console.log(filter+"("+f.length+") = "+JSON.stringify(f).replace("[","[\n\t").replace(/}\,/g,"},\n\t").replace("]","\n]"));
+} 
+		
+	</script>
 
 	</body>
 </html>
